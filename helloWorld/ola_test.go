@@ -54,4 +54,9 @@ func Test_ola3(t *testing.T) {
 		esp := "Bonjur, Gusto"
 		verificaMensagemCorreta(t, res, esp)
 	})
+	t.Run("em russo", func(t *testing.T) {
+		res := Ola("Alina", "russo")
+		esp := "Priviet, Alina"
+		verificaMensagemCorreta(t, res, esp)
+	})
 }
