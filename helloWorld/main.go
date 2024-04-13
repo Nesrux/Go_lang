@@ -2,9 +2,11 @@ package main
 
 import "fmt"
 
+const prefix = "Olá, "
+
 func main() {
-	fmt.Println(Ola())
+	fmt.Println(Ola("mundo"))
 }
-func Ola() string {
-	return "Olá mundo!"
+func Ola(nome string) string {
+	return prefix + nome
 }
