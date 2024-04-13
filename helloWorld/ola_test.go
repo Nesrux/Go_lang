@@ -22,3 +22,23 @@ func Test_Ola2(t *testing.T) {
 		t.Errorf("resultado %s, esperado %s", result, esperado)
 	}
 }
+
+func Test_ola3(t *testing.T) {
+	verificaMensagemCorreta := func(t *testing.T, res, esp string) {
+		t.Helper()
+		if res != esp {
+			t.Errorf("resultado %s esperado %s", res, esp)
+		}
+	}
+
+	t.Run("diz oká para as pessoas", func(t *testing.T) {
+		res := Ola("Chris")
+		esp := "Olá, Chris"
+		verificaMensagemCorreta(t, res, esp)
+	})
+	t.Run("diz Olá mundo quando uma string vazia for passada", func(t *testing.T) {
+		res := Ola("")
+		esp := "Olá, Mundo"
+		verificaMensagemCorreta(t, res, esp)
+	})
+}
