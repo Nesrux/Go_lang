@@ -7,7 +7,7 @@ import "testing"
 // 2) a funcão que vais er testada precisa começar com a palavra Test
 // 3) a funcção tem que receber um ponteiro de t *testing.T
 func Test_Ola(t *testing.T) {
-	resultado := Ola("mundo")
+	resultado := Ola("mundo", "")
 	esperado := "Olá, mundo"
 
 	if resultado != esperado {
@@ -16,7 +16,7 @@ func Test_Ola(t *testing.T) {
 }
 
 func Test_Ola2(t *testing.T) {
-	result := Ola("João")
+	result := Ola("João", "")
 	esperado := "Olá, João"
 	if result != esperado {
 		t.Errorf("resultado %s, esperado %s", result, esperado)
@@ -32,13 +32,26 @@ func Test_ola3(t *testing.T) {
 	}
 
 	t.Run("diz oká para as pessoas", func(t *testing.T) {
-		res := Ola("Chris")
+		res := Ola("Chris", "")
 		esp := "Olá, Chris"
 		verificaMensagemCorreta(t, res, esp)
 	})
+
 	t.Run("diz Olá mundo quando uma string vazia for passada", func(t *testing.T) {
-		res := Ola("")
+		res := Ola("", "")
 		esp := "Olá, Mundo"
+		verificaMensagemCorreta(t, res, esp)
+	})
+
+	t.Run("em espanhol", func(t *testing.T) {
+		res := Ola("Elodie", "espanhol")
+		esp := "Hola, Elodie"
+		verificaMensagemCorreta(t, res, esp)
+	})
+
+	t.Run("em frances", func(t *testing.T) {
+		res := Ola("Gusto", "frances")
+		esp := "Bonjur, Gusto"
 		verificaMensagemCorreta(t, res, esp)
 	})
 }
