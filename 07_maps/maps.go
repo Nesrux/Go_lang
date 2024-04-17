@@ -1,8 +1,15 @@
 package maps
 
-import "errors"
+const (
+	ErrNaoEncontrado    = ErrDicionario("não foi possivel encontrar a palavra que você porcurou")
+	ErrPalavraExistente = ErrDicionario("não é possível adicionar a palavra pois ela já existe")
+)
 
-var ErrNaoEncontrado = errors.New("não foi possivel encontrar a palavra que você porcurou")
+type ErrDicionario string
+
+func (e ErrDicionario) Error() string {
+	return string(e)
+}
 
 type Dicionario map[string]string
 
@@ -15,8 +22,18 @@ func (d Dicionario) Busca(palavra string) (string, error) {
 	if !exist {
 		return "", ErrNaoEncontrado
 	}
+
 	return definicao, nil
 }
-func (d Dicionario) Adiciona(palavra, definicao string) {
-	d[palavra] = definicao
+func (d Dicionario) Adiciona(palavra, definicao string) error {
+	_, err := d.Busca(palavra)
+	switch err {
+	case ErrNaoEncontrado:
+		d[palavra] = definicao
+	case nil:
+		return ErrPalavraExistente
+	default:
+		return err
+	}
+	return nil
 }
