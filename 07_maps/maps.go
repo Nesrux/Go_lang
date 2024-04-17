@@ -37,3 +37,19 @@ func (d Dicionario) Adiciona(palavra, definicao string) error {
 	}
 	return nil
 }
+
+func (d Dicionario) Atualiza(palavra, definicao string) error {
+	_, err := d.Busca(palavra)
+	switch err {
+	case ErrNaoEncontrado:
+		return ErrPalavraExistente
+	case nil:
+		d[palavra] = definicao
+	default:
+		return err
+	}
+	return nil
+}
+func (d Dicionario) Deleta(palavra string) {
+	delete(d, palavra)
+}
