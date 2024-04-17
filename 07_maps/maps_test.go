@@ -9,9 +9,8 @@ func comparaStrings(t *testing.T, resultado, esperado string) {
 	}
 }
 func Test_Busca(t *testing.T) {
-	dicionario := map[string]string{"Test": "Isso é apenas um teste"}
-
-	res := Busca(dicionario, "Test")
+	dicionario := Dicionario{"Test": "Isso é apenas um teste"}
+	res := dicionario.Busca("Test")
 	esp := "Isso é apenas um teste"
 
 	comparaStrings(t, res, esp)
